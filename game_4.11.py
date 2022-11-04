@@ -92,6 +92,7 @@ def input_(desk: List[list], win: List[list], count: int) -> Tuple[int, List[lis
     if step.isdigit():
         try:
             i, j = int(step[0]), int(step[1])  # if i - 1 and j - 1, as a result index for ceil
+            print(i, j)
             if desk[i - 1][j - 1] not in ('X', '0'):
                 desk[i - 1][j - 1] = symbol
                 count += 1
@@ -100,7 +101,7 @@ def input_(desk: List[list], win: List[list], count: int) -> Tuple[int, List[lis
             return desk, win, count
         for i1, row in enumerate(win):
             for j1, ceil in enumerate(row):
-                if ceil == int(step):
+                if ceil == int(step[0] + step[1]):
                     win[i1][j1] = symbol
     else:
         print('                Повторите ввод, вы ввели не цифры!!!')
@@ -162,23 +163,20 @@ def main():
     :return:
     """
     while True:
-        while True:
-            print('')
-            size = (input('Выберите размер поля N x N, где 3 =< N <= 9__'))
-            try:
-                if int(size) not in (list(range(3, 10))):
-                    print('Размер поля от 3 до 9, повторите ввод__')
-                else:
-                    col = row = int(size)
-                    break
-            except Exception:
-                print('Введите цифру от 3 до 9, повторите ввод__')
+        print('')
+        size = (input('Выберите размер поля N x N, где 3 =< N <= 9__'))
+        try:
+            if int(size) not in (list(range(3, 10))):
+                print('Размер поля от 3 до 9, повторите ввод__')
+            else:
+                col = row = int(size)
+        except Exception:
+            print('Введите цифру от 3 до 9, повторите ввод__')
         game(col, row)
         print('')
         new_game = input('Продолжить играть? Если нет, то введите N__')
         if new_game.upper() == 'N' and len(new_game) == 1:
             break
-
 
 if __name__ == "__main__":
     print('XXXXXXXXXXXXXXXX    КРЕСТИКИ НОЛИКИ    0000000000000000')
